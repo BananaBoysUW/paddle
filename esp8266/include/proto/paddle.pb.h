@@ -3,7 +3,7 @@
 
 #ifndef PB_BRICKBREAKER_PADDLE_PB_H_INCLUDED
 #define PB_BRICKBREAKER_PADDLE_PB_H_INCLUDED
-#include <pb.h>
+#include "pb/pb.h"
 
 #if PB_PROTO_HEADER_VERSION != 40
 #error Regenerate this file with the current version of nanopb generator.

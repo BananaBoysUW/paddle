@@ -12,6 +12,14 @@
 const size_t addrLen = 6;
 uint8_t broadcastAddr[addrLen] = {0x8C, 0x4B, 0x14, 0x5B, 0x15, 0xFC};
 
+void OnDataRecv(uint8_t *mac, uint8_t *incomingData, uint8_t len) {
+    // Serially write the hex encoded data
+    for (int i = 0; i < len; i++) {
+        Serial.printf("%02X", *(incomingData + i));
+    }
+    Serial.print('\n');
+}
+
 void setup() {
     Serial.begin(115200);
 
@@ -31,6 +39,8 @@ void setup() {
         Serial.println("Failed to add peer");
         return;
     }
+
+    esp_now_register_recv_cb(OnDataRecv);
 }
 
 
@@ -44,7 +54,6 @@ void loop() {
     if (len == 0) {
         return;
     }
-
     // Trim carriage return
     if (readBuf[len - 1] == '\r') {
         len--;
